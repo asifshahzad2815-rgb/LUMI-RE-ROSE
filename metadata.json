@@ -1,0 +1,6 @@
+{
+  "name": "AERO STEP | Премиальные кроссовки и спортивная обувь",
+  "description": "Премиальная спортивная обувь для ритма, комфорта и движения по городу. Официальный сайт AERO STEP: каталог кроссовок, инновационные технологии подошвы и клубные привилегии.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

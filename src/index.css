@@ -1,0 +1,269 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-serif: 'Playfair Display', Georgia, serif;
+    --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    color: #2D2527;
+    background-color: #FFFDF9;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+.font-serif {
+  font-family: var(--font-serif);
+}
+
+.font-sans {
+  font-family: var(--font-sans);
+}
+
+/* Dual directional marquee keyframes */
+@keyframes marquee-to-left {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes marquee-to-right {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+.animate-marquee-left {
+  display: flex;
+  width: max-content;
+  animation: marquee-to-left 32s linear infinite;
+}
+
+.animate-marquee-right {
+  display: flex;
+  width: max-content;
+  animation: marquee-to-right 32s linear infinite;
+}
+
+.animate-marquee-left:hover,
+.animate-marquee-right:hover {
+  animation-play-state: paused;
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #FAF5F0;
+}
+::-webkit-scrollbar-thumb {
+  background: #E8D8D5;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #D4A396;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* ==========================================================================
+   BUTTON SWEEP EFFECT (Left-to-Right sweep on hover, retract on mouse leave)
+   ========================================================================== */
+
+/* Universal Button Sweep Base */
+.btn-sweep {
+  position: relative !important;
+  overflow: hidden !important;
+  isolation: isolate;
+  z-index: 1;
+  transition: color 0.4s cubic-bezier(0.25, 1, 0.5, 1),
+              background-color 0.4s cubic-bezier(0.25, 1, 0.5, 1),
+              border-color 0.35s ease,
+              box-shadow 0.35s ease,
+              transform 0.2s ease !important;
+}
+
+.btn-sweep::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.42s cubic-bezier(0.25, 1, 0.5, 1);
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+/* On hover: color sweeps across starting from left to right */
+.btn-sweep:hover::before {
+  transform: scaleX(1);
+}
+
+/* On mouse leave: color retracts / recedes back to the left */
+.btn-sweep:not(:hover)::before {
+  transform: scaleX(0);
+  transform-origin: left center;
+}
+
+/* Ensure smooth text and icon color transitions inside sweep buttons */
+.btn-sweep,
+.btn-sweep *,
+.btn-sweep span,
+.btn-sweep svg {
+  transition: color 0.35s cubic-bezier(0.25, 1, 0.5, 1),
+              stroke 0.35s cubic-bezier(0.25, 1, 0.5, 1),
+              fill 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* 1. Dark Button Variant (Default):
+   Starts dark charcoal (#2D2527) with crisp white text.
+   On hover, sweeps with Rose Gold / Parisian Coral (#B76E79).
+   Text color transitions to luminous blush cream (#FFFDF9). */
+.btn-sweep-dark {
+  background-color: #2D2527 !important;
+  color: #FFFFFF !important;
+}
+.btn-sweep-dark::before {
+  background-color: #B76E79 !important;
+}
+.btn-sweep-dark:hover {
+  color: #FFFDF9 !important;
+}
+.btn-sweep-dark:hover *,
+.btn-sweep-dark:hover span {
+  color: #FFFDF9 !important;
+}
+.btn-sweep-dark:hover svg {
+  stroke: #FFFDF9 !important;
+}
+
+/* 2. Blush Button Variant (e.g., Hero "Shop Now"):
+   Starts soft pastel blush (#FCE7EC) with dark (#2D2527) text.
+   On hover, sweeps with dark charcoal (#2D2527).
+   Text color transitions to crisp white (#FFFFFF) with rose gold icon. */
+.btn-sweep-blush {
+  background-color: #FCE7EC !important;
+  color: #2D2527 !important;
+}
+.btn-sweep-blush::before {
+  background-color: #2D2527 !important;
+}
+.btn-sweep-blush:hover {
+  color: #FFFFFF !important;
+}
+.btn-sweep-blush:hover *,
+.btn-sweep-blush:hover span {
+  color: #FFFFFF !important;
+}
+.btn-sweep-blush:hover svg {
+  stroke: #FCE7EC !important;
+  color: #FCE7EC !important;
+}
+
+/* 3. Outline Button Variant (e.g., "Quick Look", "View Details", secondary buttons):
+   Starts with border and dark/accent text.
+   On hover, sweeps with #2D2527 (or #B76E79).
+   Text color transitions from dark (#2D2527) to white (#FFFFFF). */
+.btn-sweep-outline {
+  background-color: transparent !important;
+  color: #2D2527 !important;
+}
+.btn-sweep-outline::before {
+  background-color: #2D2527 !important;
+}
+.btn-sweep-outline:hover {
+  color: #FFFFFF !important;
+  border-color: #2D2527 !important;
+}
+.btn-sweep-outline:hover *,
+.btn-sweep-outline:hover span {
+  color: #FFFFFF !important;
+}
+.btn-sweep-outline:hover svg {
+  stroke: #FFFFFF !important;
+}
+
+/* 4. Glass Button Variant (e.g., Hero "View Gallery"):
+   Starts translucent white glass with white text.
+   On hover, sweeps with pastel rose blush (#FCE7EC).
+   Text color transitions from white (#FFFFFF) to dark charcoal (#2D2527). */
+.btn-sweep-glass {
+  background-color: rgba(255, 255, 255, 0.12) !important;
+  color: #FFFFFF !important;
+}
+.btn-sweep-glass::before {
+  background-color: #FCE7EC !important;
+}
+.btn-sweep-glass:hover {
+  color: #2D2527 !important;
+  border-color: #FCE7EC !important;
+}
+.btn-sweep-glass:hover *,
+.btn-sweep-glass:hover span {
+  color: #2D2527 !important;
+}
+.btn-sweep-glass:hover svg {
+  stroke: #2D2527 !important;
+}
+
+/* 5. Rose Button Variant (e.g., Newsletter "Join" or special CTAs):
+   Starts rose (#B76E79) with white text.
+   On hover, sweeps with dark (#2D2527).
+   Text color transitions to rose blush (#FCE7EC). */
+.btn-sweep-rose {
+  background-color: #B76E79 !important;
+  color: #FFFFFF !important;
+}
+.btn-sweep-rose::before {
+  background-color: #2D2527 !important;
+}
+.btn-sweep-rose:hover {
+  color: #FCE7EC !important;
+}
+.btn-sweep-rose:hover *,
+.btn-sweep-rose:hover span {
+  color: #FCE7EC !important;
+}
+.btn-sweep-rose:hover svg {
+  stroke: #FCE7EC !important;
+}
+
+/* 6. Pill Tag Variant (e.g., search suggested tags, filter pills):
+   Starts with soft background and muted text.
+   On hover, sweeps with #B76E79 and turns text to white. */
+.btn-sweep-pill {
+  background-color: #FFFFFF !important;
+  color: #665457 !important;
+}
+.btn-sweep-pill::before {
+  background-color: #B76E79 !important;
+}
+.btn-sweep-pill:hover {
+  color: #FFFFFF !important;
+  border-color: #B76E79 !important;
+}
+.btn-sweep-pill:hover *,
+.btn-sweep-pill:hover span {
+  color: #FFFFFF !important;
+}
+

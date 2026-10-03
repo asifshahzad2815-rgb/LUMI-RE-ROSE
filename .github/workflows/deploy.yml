@@ -37,13 +37,15 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Setup Pages
+        id: pages
+        uses: actions/configure-pages@v5
+
       - name: Build Vite application
         run: npm run build
         env:
           GITHUB_PAGES: 'true'
-
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
+          BASE_URL: ${{ steps.pages.outputs.base_path }}
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3

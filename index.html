@@ -15,6 +15,45 @@
   </head>
   <body class="bg-[#FFFDF9] text-[#2D2527] antialiased selection:bg-[#F3D7DC] selection:text-[#2D2527]">
     <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+    <script type="module" src="./src/main.tsx"></script>
+    <noscript>
+      <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; padding: 40px; text-align: center; color: #2D2527; background: #FFFDF9;">
+        <h2 style="font-family: serif; font-size: 24px;">LUMIÈRE ROSE</h2>
+        <p>Please enable JavaScript to view this application.</p>
+      </div>
+    </noscript>
+    <script>
+      // Diagnostic check: If opened via GitHub Pages without Vite build step
+      window.addEventListener('DOMContentLoaded', function() {
+        setTimeout(function() {
+          var root = document.getElementById('root');
+          if (root && (!root.childNodes || root.childNodes.length === 0)) {
+            var isGithub = window.location.hostname.indexOf('github.io') !== -1;
+            var box = document.createElement('div');
+            box.style.cssText = 'position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:#FFFDF9;padding:24px;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;z-index:99999;color:#2D2527;';
+            box.innerHTML = '<div style="max-width:520px;width:100%;background:#ffffff;border:1px solid #F1E5E7;border-radius:20px;padding:36px;box-shadow:0 25px 50px -12px rgba(45,37,39,0.12);text-align:center;">' +
+              '<div style="width:52px;height:52px;border-radius:50%;background:#FBEAEB;color:#9E2A2B;display:inline-flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:18px;">✨</div>' +
+              '<h2 style="font-size:22px;font-weight:700;margin:0 0 10px;font-family:serif;color:#2D2527;letter-spacing:-0.01em;">LUMIÈRE ROSE</h2>' +
+              '<p style="font-size:14px;color:#7A696C;margin:0 0 20px;line-height:1.6;">' +
+              (isGithub
+                ? 'Your website is connected to GitHub Pages! To display the compiled React application instead of this placeholder, configure GitHub Pages to use the built files.'
+                : 'The React application is initializing or requires compilation.') +
+              '</p>' +
+              '<div style="text-align:left;background:#FAF6F0;border-radius:12px;padding:16px 20px;font-size:13px;line-height:1.6;color:#59494D;margin-bottom:20px;">' +
+              '<strong>Two quick ways to enable your site on GitHub:</strong><br><br>' +
+              '<strong>Option A (Recommended • Automated):</strong><br>' +
+              '1. In your GitHub repo, go to <strong>Settings &rarr; Pages</strong>.<br>' +
+              '2. Under <em>Build and deployment &rarr; Source</em>, choose <strong>GitHub Actions</strong>.<br>' +
+              '<em>(The automated workflow in <code>.github/workflows/deploy.yml</code> will build and publish your site automatically!)</em><br><br>' +
+              '<strong>Option B (Instant from branch):</strong><br>' +
+              'In <strong>Settings &rarr; Pages</strong>, set Source to <strong>Deploy from a branch</strong>, select branch <strong>main</strong> and folder <strong>/docs</strong>.' +
+              '</div>' +
+              '<p style="font-size:12px;color:#A89B9E;margin:0;">Lumière Rose Haute Skincare &amp; Cosmetics</p>' +
+              '</div>';
+            root.appendChild(box);
+          }
+        }, 2000);
+      });
+    </script>
   </body>
 </html>
